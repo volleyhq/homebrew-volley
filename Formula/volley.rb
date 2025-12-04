@@ -29,7 +29,19 @@ class Volley < Formula
   end
 
   def install
-    bin.install "volley"
+    if OS.mac?
+      if Hardware::CPU.intel?
+        bin.install "volley-darwin-amd64" => "volley"
+      else
+        bin.install "volley-darwin-arm64" => "volley"
+      end
+    else
+      if Hardware::CPU.intel?
+        bin.install "volley-linux-amd64" => "volley"
+      else
+        bin.install "volley-linux-arm64" => "volley"
+      end
+    end
   end
 
   test do
